@@ -18,14 +18,7 @@ export default {
   name: 'noExpenses',
   data () {
     return {
-      noExpenses: [
-        {
-          id: 1,
-          category: 'Sport',
-          description: 'Trainingsjacke',
-          value: 30
-        }
-      ]
+      noExpenses: []
     }
   },
   methods: {
@@ -40,6 +33,22 @@ export default {
         return require('../assets/misc.jpeg')
       }
     }
+  },
+  mounted () {
+    const raw = ''
+
+    const requestOptions = {
+      method: 'GET',
+      body: raw,
+      redirect: 'follow'
+    }
+
+    fetch('http://localhost:8081/api/v1/nobuy', requestOptions)
+      .then(response => response.json())
+      .then(result => result.forEach(item => {
+        this.noExpenses.push(item)
+      }))
+      .catch(error => console.log('error', error))
   }
 }
 </script>
