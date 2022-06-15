@@ -35,6 +35,7 @@ export default {
     }
   },
   mounted () {
+    const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/nobuy'
     const raw = ''
 
     const requestOptions = {
@@ -43,7 +44,7 @@ export default {
       redirect: 'follow'
     }
 
-    fetch('http://localhost:8081/api/v1/nobuy', requestOptions)
+    fetch(endpoint, requestOptions)
       .then(response => response.json())
       .then(result => result.forEach(item => {
         this.noExpenses.push(item)
